@@ -15,9 +15,9 @@ class DeliveryServiceController extends Controller
     public function index()
     {
         $per_page = 10;
-        $model = DeliveryService::with([])->get();
+        $model = DeliveryService::paginate($per_page);
 
-        return DeliveryServiceResource::collection($model->paginate($per_page));
+        return DeliveryServiceResource::collection($model);
     }
 
     /**

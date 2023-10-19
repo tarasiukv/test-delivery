@@ -15,9 +15,9 @@ class PackageController extends Controller
     public function index()
     {
         $per_page = 10;
-        $model = Package::with([])->get();
+        $model = Package::paginate($per_page);;
 
-        return PackageResource::collection($model->paginate($per_page));
+        return PackageResource::collection($model);
     }
 
     /**
