@@ -5,17 +5,15 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Package extends Model
+class Delivery extends Model
 {
     use HasFactory;
 
     protected $fillable = [
-        'width',
-        'height',
-        'length',
-        'weight',
+        'delivered',
+        'delivery_service_id',
         'user_id',
-        'delivery_service_id'
+        'package_id',
     ];
 
     /**
@@ -29,19 +27,17 @@ class Package extends Model
     /**
      * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
      */
+    public function package()
+    {
+        return $this->belongsTo(Package::class, 'package_id');
+    }
+
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     */
     public function deliveryService()
     {
         return $this->belongsTo(DeliveryService::class, 'delivery_service_id');
     }
-
-    /**
-     * @return \Illuminate\Database\Eloquent\Relations\HasOne
-     */
-    public function delivery()
-    {
-        return $this->hasOne(Delivery::class, 'package_id');
-    }
-
-
 
 }

@@ -44,4 +44,21 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
         'password' => 'hashed',
     ];
+
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    public function packages()
+    {
+        return $this->hasMany(Package::class, 'user_id');
+    }
+
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    public function deliveries()
+    {
+        return $this->hasMany(Delivery::class, 'user_id');
+    }
+
 }

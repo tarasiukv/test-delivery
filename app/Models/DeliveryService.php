@@ -13,4 +13,20 @@ class DeliveryService extends Model
         'name',
         'address',
     ];
+
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    public function packages()
+    {
+        return $this->hasMany(Package::class, 'delivery_service_id');
+    }
+
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    public function deliveries()
+    {
+        return $this->hasMany(Delivery::class, 'delivery_service_id');
+    }
 }
