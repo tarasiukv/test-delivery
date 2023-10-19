@@ -2,7 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
+use App\Http\Requests\UserRequest;
+use App\Http\Resources\UserResource;
+use App\Models\User;
+use Symfony\Component\HttpFoundation\Response;
 
 class UserController extends Controller
 {
@@ -11,38 +14,47 @@ class UserController extends Controller
      */
     public function index()
     {
-        //
+        $per_page = 10;
+        $model = User::with([])->get();
+
+        return UserResource::collection($model->paginate($per_page));
     }
 
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(UserRequest $request)
     {
-        //
+        $user = User::create($request->validated());
+
+        return new UserResource($user);
     }
 
     /**
      * Display the specified resource.
      */
-    public function show(string $id)
+    public function show(User $user)
     {
-        //
+        return new UserResource($user);
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function update(UserRequest $request, User $user)
     {
-        //
+        $user->update($request->validated());
+
+        return new UserResource($user);
     }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(string $id)
+    public function destroy(User $user)
     {
-        //
+        $user->delete();
+
+        return response(null, Response::HTTP_NO_CONTENT);
     }
 }
