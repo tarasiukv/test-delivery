@@ -17,6 +17,8 @@ class DeliveryServiceResource extends JsonResource
         return [
             'name' => $this->name,
             'address' => $this->address,
+            'packages' => PackageResource::collection($this->whenLoaded('packages')),
+            'deliveries' => DeliveryResource::collection($this->whenLoaded('deliveries')),
         ];
     }
 }

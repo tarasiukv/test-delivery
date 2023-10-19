@@ -21,6 +21,8 @@ class UserResource extends JsonResource
             'password' => $this->password,
             'phone' => $this->phone,
             'address' => $this->address,
+            'packages' => PackageResource::collection($this->whenLoaded('packages')),
+            'deliveries' => DeliveryResource::collection($this->whenLoaded('deliveries')),
         ];
     }
 }

@@ -51,7 +51,7 @@ class User extends Authenticatable
     public function packages()
     {
         return $this->hasMany(Package::class, 'user_id');
-    }
+}
 
     /**
      * @return \Illuminate\Database\Eloquent\Relations\HasMany

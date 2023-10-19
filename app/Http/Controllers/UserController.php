@@ -15,9 +15,12 @@ class UserController extends Controller
     public function index()
     {
         $per_page = 10;
-        $model = User::paginate($per_page);
+        $model = User::with([
+            'packages',
+            'deliveries'
+        ]);
 
-        return UserResource::collection($model);
+        return UserResource::collection($model->paginate($per_page));
     }
 
     /**

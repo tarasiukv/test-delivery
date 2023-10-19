@@ -2,6 +2,7 @@
 
 namespace App\Http\Resources;
 
+use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\JsonResource;
 
@@ -19,6 +20,9 @@ class PackageResource extends JsonResource
             'height' => $this->height,
             'length' => $this->length,
             'weight' => $this->weight,
+            'user' => new UserResource($this->whenLoaded('user')),
+            'deliveryService' => new DeliveryServiceResource($this->whenLoaded('deliveryService')),
+            'delivery' => new DeliveryResource($this->whenLoaded('delivery')),
         ];
     }
 }
