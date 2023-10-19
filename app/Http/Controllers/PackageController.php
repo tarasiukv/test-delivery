@@ -2,8 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\PackageRequest;
+use App\Http\Resources\PackageResource;
 use App\Models\Package;
-use Illuminate\Http\Request;
+use Symfony\Component\HttpFoundation\Response;
 
 class PackageController extends Controller
 {
@@ -12,15 +14,20 @@ class PackageController extends Controller
      */
     public function index()
     {
-        //
+        $per_page = 10;
+        $model = Package::with([])->get();
+
+        return PackageResource::collection($model->paginate($per_page));
     }
 
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(PackageRequest $request)
     {
-        //
+        $package = Package::create($request->validated());
+
+        return new PackageResource($package);
     }
 
     /**
@@ -28,15 +35,17 @@ class PackageController extends Controller
      */
     public function show(Package $package)
     {
-        //
+        return new PackageResource($package);
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, Package $package)
+    public function update(PackageRequest $request, Package $package)
     {
-        //
+        $package->update($request->validated());
+
+        return new PackageResource($package);
     }
 
     /**
@@ -44,6 +53,8 @@ class PackageController extends Controller
      */
     public function destroy(Package $package)
     {
-        //
+        $package->delete();
+
+        return response(null, Response::HTTP_NO_CONTENT);
     }
 }
