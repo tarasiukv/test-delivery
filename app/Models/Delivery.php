@@ -14,6 +14,8 @@ class Delivery extends Model
         'delivery_service_id',
         'user_id',
         'package_id',
+        'delivery_address',
+        'sent_at',
     ];
 
     /**

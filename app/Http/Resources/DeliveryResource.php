@@ -20,6 +20,8 @@ class DeliveryResource extends JsonResource
             'delivery_service_id' => $this->delivery_service_id,
             'user_id' => $this->user_id,
             'package_id' => $this->package_id,
+            'delivery_address' => $this->delivery_address,
+            'sent_at' => $this->sent_at,
             'deliveryService' => new DeliveryServiceResource($this->whenLoaded('deliveryService')),
             'package' => new PackageResource($this->whenLoaded('package')),
             'user' => new UserResource($this->whenLoaded('package'))

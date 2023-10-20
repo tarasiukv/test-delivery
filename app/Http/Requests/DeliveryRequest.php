@@ -26,6 +26,8 @@ class DeliveryRequest extends FormRequest
             'delivery_service_id' => 'sometimes|nullable|string',
             'user_id' =>  'sometimes|nullable|string',
             'package_id' => 'sometimes|nullable|string',
+            'delivery_address' => 'sometimes|nullable|string',
+            'sent_at' => 'sometimes|nullable|string',
         ];
     }
 }
